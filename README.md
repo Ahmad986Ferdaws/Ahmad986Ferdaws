@@ -2,8 +2,6 @@
 
 # Ahmad Ferdaws Shafiq
 
-**AI Engineer** · Houston, TX · Open to AI / ML engineering roles
-
 <a href="https://ferdaws.dev"><img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=18&duration=3200&pause=1000&color=58A6FF&center=true&vCenter=true&width=640&lines=I+build+ML+systems+that+know+when+to+say+%22I+don%27t+know.%22;Sealed+test+sets.+Calibrated+confidence.+Honest+results.;From+research+notebook+to+tested%2C+shipped+software." alt="I build ML systems that know when to say I don't know" /></a>
 
 [![Portfolio](https://img.shields.io/badge/ferdaws.dev-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ferdaws.dev)
