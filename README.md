@@ -11,24 +11,50 @@
 
 I build machine learning for settings where a confident wrong answer is expensive: models that abstain when unsure, evaluations that can't leak, and results I report even when the answer is *no*.
 
-### ⚡ Featured work
+## 🔬 Projects
 
-| Project | What it proves |
-|:--|:--|
-| **[ECG Trust Lab](https://github.com/Ahmad986Ferdaws/ecg-trust-lab)**<br><sub>PyTorch · FastAPI · Plotly</sub> | 12-lead ECG classifier on PTB-XL (21K ECGs, 18K patients) scored once on a sealed test fold: **0.922 macro-AUROC**, calibrated probabilities, and a confidence gate that defers uncertain cases to a human. The frozen models then hit **0.931 AUROC on a second, independent dataset with zero retuning**. 494 automated tests, strict mypy. |
-| **[REGIME](https://github.com/Ahmad986Ferdaws/markov_selflearning_trade)**<br><sub>Python · GitHub Actions</sub> | My trading model scored **90.9%**, so I built a harness to try to break it. Across **20 markets, 20 years of history and 16,773 held-out predictions**, its edge over the naive *"tomorrow = today"* baseline is **exactly zero**. Positive controls in CI prove the harness catches a real edge when one exists. |
-| **[FoodVisor AI](https://github.com/Ahmad986Ferdaws/food_visor_ai)**<br><sub>FastAPI · Next.js · pgvector · Celery</sub> | Three cooperating LLM agents (context → recommend → validate) over **pgvector RAG**, with long-running jobs on Celery + Redis. The full stack comes up with one `docker compose up`. |
-| **[Cortex BCI Visualizer](https://github.com/Ahmad986Ferdaws/Neuron-cortex-simulation-model)**<br><sub>React Three Fiber · TypeScript</sub> | **Rice Datathon 2026.** A 3D head model that polls our team's EEGNet motor-imagery model every 250 ms and lights up the matching motor-cortex electrodes. The model reads 4 movement intentions from raw 64-channel EEG at **42% vs 25% chance, on unseen subjects**. |
+### 🫀 [ECG Trust Lab](https://github.com/Ahmad986Ferdaws/ecg-trust-lab): heart-signal AI you can audit
+<sub>PyTorch · FastAPI · Plotly · pytest · mypy</sub>
 
-### 🧭 How I work
+Most ML projects stop at "the model is accurate." This one asks what it would take to *trust* it.
 
-- **Sealed evaluation.** The final test set is touched once. Calibration and thresholds get their own data.
-- **Receipts over vibes.** A null result with evidence beats an impressive number nobody checked.
-- **Ship it end to end.** Typed code, tests, CI, Docker, and a demo you can actually click.
+- Trained a 1D ResNet and an ECG transformer under the same budget on **21,388 ECGs from 18,617 patients** (PTB-XL), with no patient shared across splits.
+- Scored once on a sealed test fold: **0.922 macro-AUROC**, with calibrated probabilities and a confidence gate that defers uncertain ECGs instead of guessing.
+- Ran the frozen models **unchanged on a second dataset of 15.7K ECGs: 0.931 AUROC with zero retuning**.
+- The audit surfaced what one score hides: the gate accepts only 60–65% of patients aged 80+ vs ~94% under 40, and reversed leads cause the worst failures.
+- Local demo with the 12-lead waveform, calibrated scores, accept/defer decision and Grad-CAM overlay. **494 automated tests**, strict mypy.
+- Now building **Trust Sentinel**: input-quality checks, unfamiliar-input detection, conformal uncertainty and fail-closed decisions.
 
-### 🛠️ Stack
+### 📉 [REGIME](https://github.com/Ahmad986Ferdaws/markov_selflearning_trade): proving my own model has no edge
+<sub>Python · GitHub Actions · walk-forward evaluation</sub>
+
+My Markov regime trading model hit a **90.9%** hit rate. I built a harness to find out if that was real.
+
+- It wasn't. Guessing *"tomorrow = today"* also scores **90.9%**, so the edge is **exactly zero**.
+- The result held across **20 markets** and **20 years** of history, including 2008, COVID and the 2022 bear market: **0 differences in 16,773 held-out predictions**.
+- Found the cause: the transition matrix is so sticky the model never predicts a change (**0 of 30** regime switches caught).
+- Positive controls in CI prove the harness *does* catch a real edge when one is planted. Byte-reproducible from a fresh clone.
+
+### 🥗 [FoodVisor AI](https://github.com/Ahmad986Ferdaws/food_visor_ai): multi-agent nutrition recommender
+<sub>FastAPI · Next.js · PostgreSQL + pgvector · Celery · Redis · Docker</sub>
+
+- Three LLM agents in a pipeline: one builds the user's context, one recommends meals, one checks the result against the user's constraints.
+- Retrieval-augmented generation over a knowledge base stored as **pgvector** embeddings.
+- Long agent runs go to **Celery** workers so the API stays fast. JWT auth, Alembic migrations, and the whole stack starts with one `docker compose up`.
+
+### 🧠 [Cortex BCI Visualizer](https://github.com/Ahmad986Ferdaws/Neuron-cortex-simulation-model): Rice Datathon 2026
+<sub>React Three Fiber · Three.js · TypeScript · EEGNet</sub>
+
+- A 3D head model that sends 64-channel EEG trials to our team's model every 250 ms and lights up the matching motor-cortex electrodes.
+- The EEGNet model reads 4 movement intentions (left hand, right hand, both hands, feet) from raw brain signals: **42% vs 25% chance, on people it never saw in training**.
+
+### 🎓 [Admission Copilot](https://github.com/Ahmad986Ferdaws/Admission-Copilot): university program matching
+<sub>Next.js 14 · TypeScript · Prisma · PostgreSQL · Gemini</sub>
+
+- Matches students to programs on GPA, test scores, budget, location and major, then sorts them into **Safe / Match / Reach**.
+- Gemini explains why each program fits, generates document checklists and builds a deadline-tracked task list.
+
+## 🛠️ Stack
 
 <img src="https://skillicons.dev/icons?i=py,pytorch,tensorflow,sklearn,fastapi,postgres,redis,docker,aws,azure&theme=dark" alt="Python, PyTorch, TensorFlow, scikit-learn, FastAPI, PostgreSQL, Redis, Docker, AWS, Azure" /><br>
 <img src="https://skillicons.dev/icons?i=ts,react,nextjs,tailwind,threejs,nodejs,githubactions,git,linux&theme=dark" alt="TypeScript, React, Next.js, Tailwind, Three.js, Node.js, GitHub Actions, Git, Linux" />
-
-<sub>Also: LLM agents · RAG · LangChain · pgvector · Celery · Prisma · MNE-Python · calibration & conformal methods</sub>
