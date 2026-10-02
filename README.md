@@ -13,46 +13,11 @@ I build machine learning for settings where a confident wrong answer is expensiv
 
 ## 🔬 Projects
 
-### 🫀 [ECG Trust Lab](https://github.com/Ahmad986Ferdaws/ecg-trust-lab): heart-signal AI you can audit
-<sub>PyTorch · FastAPI · Plotly · pytest · mypy</sub>
-
-Most ML projects stop at "the model is accurate." This one asks what it would take to *trust* it.
-
-- Trained a 1D ResNet and an ECG transformer under the same budget on **21,388 ECGs from 18,617 patients** (PTB-XL), with no patient shared across splits.
-- Scored once on a sealed test fold: **0.922 macro-AUROC**, with calibrated probabilities and a confidence gate that defers uncertain ECGs instead of guessing.
-- Ran the frozen models **unchanged on a second dataset of 15.7K ECGs: 0.931 AUROC with zero retuning**.
-- The audit surfaced what one score hides: the gate accepts only 60–65% of patients aged 80+ vs ~94% under 40, and reversed leads cause the worst failures.
-- Local demo with the 12-lead waveform, calibrated scores, accept/defer decision and Grad-CAM overlay. **494 automated tests**, strict mypy.
-- Now building **Trust Sentinel**: input-quality checks, unfamiliar-input detection, conformal uncertainty and fail-closed decisions.
-
-### 📉 [REGIME](https://github.com/Ahmad986Ferdaws/markov_selflearning_trade): proving my own model has no edge
-<sub>Python · GitHub Actions · walk-forward evaluation</sub>
-
-My Markov regime trading model hit a **90.9%** hit rate. I built a harness to find out if that was real.
-
-- It wasn't. Guessing *"tomorrow = today"* also scores **90.9%**, so the edge is **exactly zero**.
-- The result held across **20 markets** and **20 years** of history, including 2008, COVID and the 2022 bear market: **0 differences in 16,773 held-out predictions**.
-- Found the cause: the transition matrix is so sticky the model never predicts a change (**0 of 30** regime switches caught).
-- Positive controls in CI prove the harness *does* catch a real edge when one is planted. Byte-reproducible from a fresh clone.
-
-### 🥗 [FoodVisor AI](https://github.com/Ahmad986Ferdaws/food_visor_ai): multi-agent nutrition recommender
-<sub>FastAPI · Next.js · PostgreSQL + pgvector · Celery · Redis · Docker</sub>
-
-- Three LLM agents in a pipeline: one builds the user's context, one recommends meals, one checks the result against the user's constraints.
-- Retrieval-augmented generation over a knowledge base stored as **pgvector** embeddings.
-- Long agent runs go to **Celery** workers so the API stays fast. JWT auth, Alembic migrations, and the whole stack starts with one `docker compose up`.
-
-### 🧠 [Cortex BCI Visualizer](https://github.com/Ahmad986Ferdaws/Neuron-cortex-simulation-model): Rice Datathon 2026
-<sub>React Three Fiber · Three.js · TypeScript · EEGNet</sub>
-
-- A 3D head model that sends 64-channel EEG trials to our team's model every 250 ms and lights up the matching motor-cortex electrodes.
-- The EEGNet model reads 4 movement intentions (left hand, right hand, both hands, feet) from raw brain signals: **42% vs 25% chance, on people it never saw in training**.
-
-### 🎓 [Admission Copilot](https://github.com/Ahmad986Ferdaws/Admission-Copilot): university program matching
-<sub>Next.js 14 · TypeScript · Prisma · PostgreSQL · Gemini</sub>
-
-- Matches students to programs on GPA, test scores, budget, location and major, then sorts them into **Safe / Match / Reach**.
-- Gemini explains why each program fits, generates document checklists and builds a deadline-tracked task list.
+- **[ECG Trust Lab](https://github.com/Ahmad986Ferdaws/ecg-trust-lab)**: AI that reads heart signals (ECGs) and flags uncertain cases for review instead of guessing. Scored **0.922 AUROC** on 21K ECGs and held up on a second dataset with **zero retuning**.<br><sub>PyTorch · FastAPI · Plotly</sub>
+- **[REGIME](https://github.com/Ahmad986Ferdaws/markov_selflearning_trade)**: My trading model looked **90.9% right**, so I built a harness to test it and proved it had **zero real edge** across 20 markets and 20 years of data.<br><sub>Python · GitHub Actions</sub>
+- **[FoodVisor AI](https://github.com/Ahmad986Ferdaws/food_visor_ai)**: A nutrition app where three AI agents work as a team (understand the user, recommend meals, double-check the result), backed by RAG search and background workers.<br><sub>FastAPI · Next.js · pgvector · Celery</sub>
+- **[Cortex BCI Visualizer](https://github.com/Ahmad986Ferdaws/Neuron-cortex-simulation-model)**: Rice Datathon 2026. A 3D brain view that lights up as our model reads movement intentions from raw brain signals (**42% vs 25% chance** on people it never saw).<br><sub>React Three Fiber · Three.js · EEGNet</sub>
+- **[Admission Copilot](https://github.com/Ahmad986Ferdaws/Admission-Copilot)**: Sorts universities into Safe / Match / Reach for each student and uses AI to explain every fit and build their application checklist.<br><sub>Next.js · Prisma · Gemini</sub>
 
 ## 🛠️ Stack
 
